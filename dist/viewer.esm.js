@@ -5,7 +5,7 @@
  * Copyright (c) 2017-2017 stbui
  * Released under the MIT license
  *
- * Date: 2017-10-18T10:15:59.992Z
+ * Date: 2017-10-31T06:27:57.308Z
  */
 
 import $ from 'jquery';
@@ -39,7 +39,7 @@ var DEFAULTS = {
   rotatable: true,
 
   // Enable to scale the image
-  scalable: true,
+  scalable: false,
 
   // Enable CSS3 Transition for some special elements
   transition: true,
@@ -79,6 +79,11 @@ var DEFAULTS = {
   url: 'src',
 
   autoShow: true,
+  one_To_one: false,
+  rotatable_reset: false,
+  rotatable_left: false,
+  rotatable_right: false,
+  player: false,
 
   // Event shortcuts
   ready: null,
@@ -126,7 +131,7 @@ var EVENT_READY = 'ready';
 var EVENT_SHOW = 'show';
 var EVENT_SHOWN = 'shown';
 var EVENT_HIDE = 'hide';
-var EVENT_HIDDEN = 'hidden';
+var EVENT_HIDDEN = NAMESPACE + '.hidden';
 var EVENT_VIEW = 'view';
 var EVENT_VIEWED = 'viewed';
 var EVENT_CLICK = 'click';
@@ -1967,10 +1972,17 @@ var Viewer = function () {
       $title.addClass(!options.title ? CLASS_HIDE : getResponsiveClass(options.title));
       $toolbar.addClass(!options.toolbar ? CLASS_HIDE : getResponsiveClass(options.toolbar));
       $toolbar.find('li[class*=zoom]').toggleClass(CLASS_INVISIBLE, !options.zoomable);
-      $toolbar.find('li[class*=flip]').toggleClass(CLASS_INVISIBLE, !options.scalable);
-      $toolbar.find('li[class*=prev]').toggle(false);
-      $toolbar.find('li[class*=play]').toggle(false);
-      $toolbar.find('li[class*=next]').toggle(false);
+      $toolbar.find('li[class*=flip]').toggleClass(CLASS_HIDE, !options.scalable);
+      $toolbar.find('li[class*=prev]').toggle(options.player);
+      $toolbar.find('li[class*=play]').toggle(options.player);
+      $toolbar.find('li[class*=next]').toggle(options.player);
+      $toolbar.find('li[class*=one-to-one]').toggle(options.one_To_one);
+      $toolbar.find('li[class*=reset]').toggle(options.rotatable_reset);
+      $toolbar.find('li[class*=rotate-left]').toggle(options.rotatable_left);
+
+      if (!options.scalable) {
+        $toolbar.css('padding-left', 75);
+      }
 
       if (!options.rotatable) {
         $toolbar.find('li[class*=rotate]').addClass(CLASS_INVISIBLE).appendTo($toolbar);

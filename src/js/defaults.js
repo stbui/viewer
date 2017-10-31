@@ -27,7 +27,7 @@ export default {
   rotatable: true,
 
   // Enable to scale the image
-  scalable: true,
+  scalable: false,
 
   // Enable CSS3 Transition for some special elements
   transition: true,
@@ -67,6 +67,11 @@ export default {
   url: 'src',
 
   autoShow: true,
+  one_To_one: false,
+  rotatable_reset: false,
+  rotatable_left: false,
+  rotatable_right: false,
+  player: false,
 
   // Event shortcuts
   ready: null,

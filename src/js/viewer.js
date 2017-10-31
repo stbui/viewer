@@ -146,10 +146,17 @@ class Viewer {
     $title.addClass(!options.title ? CLASS_HIDE : getResponsiveClass(options.title));
     $toolbar.addClass(!options.toolbar ? CLASS_HIDE : getResponsiveClass(options.toolbar));
     $toolbar.find('li[class*=zoom]').toggleClass(CLASS_INVISIBLE, !options.zoomable);
-    $toolbar.find('li[class*=flip]').toggleClass(CLASS_INVISIBLE, !options.scalable);
-    $toolbar.find('li[class*=prev]').toggle(false);
-    $toolbar.find('li[class*=play]').toggle(false);
-    $toolbar.find('li[class*=next]').toggle(false);
+    $toolbar.find('li[class*=flip]').toggleClass(CLASS_HIDE, !options.scalable);
+    $toolbar.find('li[class*=prev]').toggle(options.player);
+    $toolbar.find('li[class*=play]').toggle(options.player);
+    $toolbar.find('li[class*=next]').toggle(options.player);
+    $toolbar.find('li[class*=one-to-one]').toggle(options.one_To_one);
+    $toolbar.find('li[class*=reset]').toggle(options.rotatable_reset);
+    $toolbar.find('li[class*=rotate-left]').toggle(options.rotatable_left);
+
+    if (!options.scalable) {
+      $toolbar.css('padding-left', 75);
+    }
 
     if (!options.rotatable) {
       $toolbar.find('li[class*=rotate]').addClass(CLASS_INVISIBLE).appendTo($toolbar);
