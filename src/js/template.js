@@ -25,5 +25,6 @@ export default (
     '<div class="viewer-tooltip"></div>' +
     '<div role="button" class="viewer-button" data-action="mix"></div>' +
     '<div class="viewer-player"></div>' +
+    '<div class="viewer-arrow"><div class="viewer-arrow-left"></div><div class="viewer-arrow-right"></div></div>' +
   '</div>'
 );

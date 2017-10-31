@@ -31,9 +31,12 @@ export default {
       .on(EVENT_CLICK, $.proxy(this.click, this))
       .on(EVENT_WHEEL, $.proxy(this.wheel, this))
       .on(EVENT_DRAG_START, $.proxy(this.dragstart, this))
-      .on(EVENT_CLICK, 'img', (e) => e.stopPropagation());
+      .on(EVENT_CLICK, 'img', e => e.stopPropagation());
 
     this.$canvas.on(EVENT_POINTER_DOWN, $.proxy(this.pointerdown, this));
+
+    this.$arrowLeft.on(EVENT_CLICK, (e) => { e.stopPropagation(); this.prev(); });
+    this.$arrowRight.on(EVENT_CLICK, (e) => { e.stopPropagation(); this.next(); });
 
     $(document)
       .on(EVENT_POINTER_MOVE, (this.onPointerMove = proxy(this.pointermove, this)))

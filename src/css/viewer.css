@@ -11,24 +11,29 @@
 .viewer-flip-vertical::before,
 .viewer-fullscreen::before,
 .viewer-fullscreen-exit::before,
-.viewer-close::before {
+.viewer-close::before,
+.viewer-download::before {
   background-image: url('../images/icons.png');
   background-repeat: no-repeat;
   color: transparent;
   display: block;
   font-size: 0;
-  height: 20px;
+  height: 28px;
   line-height: 0;
-  width: 20px;
+  width: 28px;
 }
 
 .viewer-zoom-in::before {
-  background-position: 0 0;
+  /*background-position: 0 0;*/
+  background: url("../images/zoom-in.png") no-repeat center;
+  background-size: cover;
   content: 'Zoom In';
 }
 
 .viewer-zoom-out::before {
-  background-position: -20px 0;
+  /*background-position: -20px 0;*/
+  background: url("../images/zoom-out.png") no-repeat center;
+  background-size: cover;
   content: 'Zoom Out';
 }
 
@@ -63,7 +68,9 @@
 }
 
 .viewer-rotate-right::before {
-  background-position: -160px 0;
+  /*background-position: -160px 0;*/
+  background: url("../images/rotate-right.png") no-repeat center;
+  background-size: cover;
   content: 'Rotate Right';
 }
 
@@ -88,19 +95,15 @@
 }
 
 .viewer-close::before {
-  background-position: -260px 0;
+  /*background-position: -260px 0;*/
+  background: url("../images/close.png") no-repeat center;
+  background-size: cover;
   content: 'Close';
 }
 .viewer-download::before {
   background: url("../images/download.png") no-repeat center;
-  content: 'Download';
   background-size: cover;
-  color: transparent;
-  display: block;
-  font-size: 0;
-  height: 18px;
-  line-height: 0;
-  width: 18px;
+  content: 'Download';
 }
 
 .viewer-download {
@@ -230,12 +233,12 @@
 
   & > li {
     background-color: rgba(0, 0, 0, .5);
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     cursor: pointer;
     float: left;
-    height: 24px;
+    height: 32px;
     overflow: hidden;
-    width: 24px;
+    width: 32px;
 
     &:hover {
       background-color: rgba(0, 0, 0, .8);
@@ -367,4 +370,30 @@
   .viewer-hide-md-down {
     display: none;
   }
+}
+
+.viewer-arrow {
+  display: block;
+}
+
+.viewer-arrow-left {
+  background: url("../images/arrow-left.png") no-repeat center;
+  background-size: cover;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -64px;
+}
+
+.viewer-arrow-right {
+  background: url("../images/arrow-right.png") no-repeat center;
+  background-size: cover;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -64px;
 }

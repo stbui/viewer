@@ -5,7 +5,7 @@
  * Copyright (c) 2017-2017 stbui
  * Released under the MIT license
  *
- * Date: 2017-10-31T05:52:41.044Z
+ * Date: 2017-10-31T09:24:49.465Z
  */
 
 'use strict';
@@ -99,7 +99,7 @@ var DEFAULTS = {
   viewed: null
 };
 
-var TEMPLATE = '<div class="viewer-container">' + '<div class="viewer-canvas"></div>' + '<div class="viewer-footer">' + '<div class="viewer-title"></div>' + '<ul class="viewer-toolbar">' + '<li role="button" class="viewer-zoom-in" data-action="zoom-in"></li>' + '<li role="button" class="viewer-zoom-out" data-action="zoom-out"></li>' + '<li role="button" class="viewer-one-to-one" data-action="one-to-one"></li>' + '<li role="button" class="viewer-reset" data-action="reset"></li>' + '<li role="button" class="viewer-prev" data-action="prev"></li>' + '<li role="button" class="viewer-play" data-action="play"></li>' + '<li role="button" class="viewer-next" data-action="next"></li>' + '<li role="button" class="viewer-rotate-left" data-action="rotate-left"></li>' + '<li role="button" class="viewer-rotate-right" data-action="rotate-right"></li>' + '<li role="button" class="viewer-flip-horizontal" data-action="flip-horizontal"></li>' + '<li role="button" class="viewer-flip-vertical" data-action="flip-vertical"></li>' + '<li role="button" class="viewer-download" data-action="download"></li>' + '<li role="button" class="viewer-close" data-action="mix"></li>' + '</ul>' + '<div class="viewer-navbar">' + '<ul class="viewer-list"></ul>' + '</div>' + '</div>' + '<div class="viewer-tooltip"></div>' + '<div role="button" class="viewer-button" data-action="mix"></div>' + '<div class="viewer-player"></div>' + '</div>';
+var TEMPLATE = '<div class="viewer-container">' + '<div class="viewer-canvas"></div>' + '<div class="viewer-footer">' + '<div class="viewer-title"></div>' + '<ul class="viewer-toolbar">' + '<li role="button" class="viewer-zoom-in" data-action="zoom-in"></li>' + '<li role="button" class="viewer-zoom-out" data-action="zoom-out"></li>' + '<li role="button" class="viewer-one-to-one" data-action="one-to-one"></li>' + '<li role="button" class="viewer-reset" data-action="reset"></li>' + '<li role="button" class="viewer-prev" data-action="prev"></li>' + '<li role="button" class="viewer-play" data-action="play"></li>' + '<li role="button" class="viewer-next" data-action="next"></li>' + '<li role="button" class="viewer-rotate-left" data-action="rotate-left"></li>' + '<li role="button" class="viewer-rotate-right" data-action="rotate-right"></li>' + '<li role="button" class="viewer-flip-horizontal" data-action="flip-horizontal"></li>' + '<li role="button" class="viewer-flip-vertical" data-action="flip-vertical"></li>' + '<li role="button" class="viewer-download" data-action="download"></li>' + '<li role="button" class="viewer-close" data-action="mix"></li>' + '</ul>' + '<div class="viewer-navbar">' + '<ul class="viewer-list"></ul>' + '</div>' + '</div>' + '<div class="viewer-tooltip"></div>' + '<div role="button" class="viewer-button" data-action="mix"></div>' + '<div class="viewer-player"></div>' + '<div class="viewer-arrow"><div class="viewer-arrow-left"></div><div class="viewer-arrow-right"></div></div>' + '</div>';
 
 var _window = window;
 var PointerEvent = _window.PointerEvent;
@@ -149,6 +149,11 @@ var EVENT_RESIZE = 'resize';
 var EVENT_TRANSITION_END = 'transitionend';
 var EVENT_WHEEL = 'wheel mousewheel DOMMouseScroll';
 
+/**
+ * Check if the given value is a string.
+ * @param {*} value - The value to check.
+ * @returns {boolean} Returns `true` if the given value is a string, else `false`.
+ */
 function isString(value) {
   return typeof value === 'string';
 }
@@ -562,6 +567,8 @@ var render = {
 
 var events = {
   bind: function bind() {
+    var _this = this;
+
     var $element = this.$element,
         options = this.options;
 
@@ -579,6 +586,13 @@ var events = {
     });
 
     this.$canvas.on(EVENT_POINTER_DOWN, $.proxy(this.pointerdown, this));
+
+    this.$arrowLeft.on(EVENT_CLICK, function (e) {
+      e.stopPropagation();_this.prev();
+    });
+    this.$arrowRight.on(EVENT_CLICK, function (e) {
+      e.stopPropagation();_this.next();
+    });
 
     $(document).on(EVENT_POINTER_MOVE, this.onPointerMove = proxy(this.pointermove, this)).on(EVENT_POINTER_UP, this.onPointerUp = proxy(this.pointerup, this)).on(EVENT_KEY_DOWN, this.onKeyDown = proxy(this.keydown, this));
 
@@ -1698,8 +1712,7 @@ var methods = {
 
     this.unbuild();
     $element.removeData(NAMESPACE);
-  },
-  download: function download() {}
+  }
 };
 
 var _window$1 = window;
@@ -1971,6 +1984,9 @@ var Viewer = function () {
       this.$player = $viewer.find('.' + NAMESPACE + '-player');
       this.$tooltip = $viewer.find('.' + NAMESPACE + '-tooltip');
       this.$download = $viewer.find('.' + NAMESPACE + '-download');
+      this.$arrows = $viewer.find('.' + NAMESPACE + '-arrow');
+      this.$arrowLeft = $viewer.find('.' + NAMESPACE + '-arrow-left');
+      this.$arrowRight = $viewer.find('.' + NAMESPACE + '-arrow-right');
 
       $title.addClass(!options.title ? CLASS_HIDE : getResponsiveClass(options.title));
       $toolbar.addClass(!options.toolbar ? CLASS_HIDE : getResponsiveClass(options.toolbar));
@@ -1983,8 +1999,11 @@ var Viewer = function () {
       $toolbar.find('li[class*=reset]').toggle(options.rotatable_reset);
       $toolbar.find('li[class*=rotate-left]').toggle(options.rotatable_left);
 
+      if (this.original) {
+        this.$arrows.toggleClass(CLASS_HIDE, true);
+      }
       if (!options.scalable) {
-        $toolbar.css('padding-left', 75);
+        $toolbar.width(165);
       }
 
       if (!options.rotatable) {
@@ -2092,4 +2111,3 @@ $.fn.viewer.noConflict = function noConflict() {
   $.fn.viewer = AnotherViewer;
   return this;
 };
-//# sourceMappingURL=viewer.common.js.map

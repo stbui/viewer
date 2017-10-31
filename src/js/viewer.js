@@ -142,6 +142,9 @@ class Viewer {
     this.$player = $viewer.find(`.${NAMESPACE}-player`);
     this.$tooltip = $viewer.find(`.${NAMESPACE}-tooltip`);
     this.$download = $viewer.find(`.${NAMESPACE}-download`);
+    this.$arrows = $viewer.find(`.${NAMESPACE}-arrow`);
+    this.$arrowLeft = $viewer.find(`.${NAMESPACE}-arrow-left`);
+    this.$arrowRight = $viewer.find(`.${NAMESPACE}-arrow-right`);
 
     $title.addClass(!options.title ? CLASS_HIDE : getResponsiveClass(options.title));
     $toolbar.addClass(!options.toolbar ? CLASS_HIDE : getResponsiveClass(options.toolbar));
@@ -154,8 +157,11 @@ class Viewer {
     $toolbar.find('li[class*=reset]').toggle(options.rotatable_reset);
     $toolbar.find('li[class*=rotate-left]').toggle(options.rotatable_left);
 
+    if (this.original) {
+      this.$arrows.toggleClass(CLASS_HIDE, true);
+    }
     if (!options.scalable) {
-      $toolbar.css('padding-left', 75);
+      $toolbar.width(165);
     }
 
     if (!options.rotatable) {

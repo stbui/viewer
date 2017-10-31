@@ -674,8 +674,4 @@ export default {
     this.unbuild();
     $element.removeData(NAMESPACE);
   },
-
-  download() {
-
-  },
 };
