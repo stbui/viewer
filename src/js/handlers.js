@@ -92,6 +92,8 @@ export default {
       default:
         if (this.played) {
           this.stop();
+        } else {
+          this.hide();
         }
     }
   },

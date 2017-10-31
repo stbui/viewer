@@ -5,7 +5,7 @@
  * Copyright (c) 2017-2017 stbui
  * Released under the MIT license
  *
- * Date: 2017-10-31T06:27:57.308Z
+ * Date: 2017-10-31T05:52:41.044Z
  */
 
 (function (global, factory) {
@@ -151,11 +151,6 @@ var EVENT_RESIZE = 'resize';
 var EVENT_TRANSITION_END = 'transitionend';
 var EVENT_WHEEL = 'wheel mousewheel DOMMouseScroll';
 
-/**
- * Check if the given value is a string.
- * @param {*} value - The value to check.
- * @returns {boolean} Returns `true` if the given value is a string, else `false`.
- */
 function isString(value) {
   return typeof value === 'string';
 }
@@ -581,7 +576,9 @@ var events = {
       $element.on(EVENT_VIEWED, options.viewed);
     }
 
-    this.$viewer.on(EVENT_CLICK, $.proxy(this.click, this)).on(EVENT_WHEEL, $.proxy(this.wheel, this)).on(EVENT_DRAG_START, $.proxy(this.dragstart, this));
+    this.$viewer.on(EVENT_CLICK, $.proxy(this.click, this)).on(EVENT_WHEEL, $.proxy(this.wheel, this)).on(EVENT_DRAG_START, $.proxy(this.dragstart, this)).on(EVENT_CLICK, 'img', function (e) {
+      return e.stopPropagation();
+    });
 
     this.$canvas.on(EVENT_POINTER_DOWN, $.proxy(this.pointerdown, this));
 
@@ -690,6 +687,8 @@ var handlers = {
       default:
         if (this.played) {
           this.stop();
+        } else {
+          this.hide();
         }
     }
   },
@@ -2097,3 +2096,4 @@ $.fn.viewer.noConflict = function noConflict() {
 };
 
 })));
+//# sourceMappingURL=viewer.js.map

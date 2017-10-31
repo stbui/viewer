@@ -30,7 +30,8 @@ export default {
     this.$viewer
       .on(EVENT_CLICK, $.proxy(this.click, this))
       .on(EVENT_WHEEL, $.proxy(this.wheel, this))
-      .on(EVENT_DRAG_START, $.proxy(this.dragstart, this));
+      .on(EVENT_DRAG_START, $.proxy(this.dragstart, this))
+      .on(EVENT_CLICK, 'img', (e) => e.stopPropagation());
 
     this.$canvas.on(EVENT_POINTER_DOWN, $.proxy(this.pointerdown, this));
 
