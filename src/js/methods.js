@@ -133,8 +133,8 @@ export default {
     this.$canvas.html($image.addClass(CLASS_INVISIBLE));
 
     // set download current image link
-    const $download = $(`<a href="${$img.data('originalUrl')}" download="${alt}"></a>`);
-    this.$download.html($download);
+    const $download = $(`<a href="${$img.data('originalUrl')}" download="${alt}" data-download="true"></a>`);
+    this.$download.html($download).one(EVENT_CLICK, e => e.stopPropagation());
 
     // Center current item
     this.renderList();

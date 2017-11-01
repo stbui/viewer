@@ -5,7 +5,7 @@
  * Copyright (c) 2017-2017 stbui
  * Released under the MIT license
  *
- * Date: 2017-11-01T02:49:14.556Z
+ * Date: 2017-11-01T03:47:25.941Z
  */
 
 (function (global, factory) {
@@ -695,7 +695,6 @@ var handlers = {
         break;
 
       case 'download':
-        this.download();
         break;
 
       default:
@@ -1114,8 +1113,10 @@ var methods = {
     this.$canvas.html($image.addClass(CLASS_INVISIBLE));
 
     // set download current image link
-    var $download = $('<a href="' + $img.data('originalUrl') + '" download="' + alt + '"></a>');
-    this.$download.html($download);
+    var $download = $('<a href="' + $img.data('originalUrl') + '" download="' + alt + '" data-download="true"></a>');
+    this.$download.html($download).one(EVENT_CLICK, function (e) {
+      return e.stopPropagation();
+    });
 
     // Center current item
     this.renderList();
@@ -2001,7 +2002,7 @@ var Viewer = function () {
       $toolbar.find('li[class*=reset]').toggle(options.rotatable_reset);
       $toolbar.find('li[class*=rotate-left]').toggle(options.rotatable_left);
 
-      if (this.original) {
+      if (this.$images.length <= 1) {
         this.$arrows.toggleClass(CLASS_HIDE, true);
       }
       if (!options.scalable) {

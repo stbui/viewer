@@ -86,7 +86,6 @@ export default {
         break;
 
       case 'download':
-        this.download();
         break;
 
       default:
