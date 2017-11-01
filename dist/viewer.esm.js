@@ -5,7 +5,7 @@
  * Copyright (c) 2017-2017 stbui
  * Released under the MIT license
  *
- * Date: 2017-10-31T09:24:49.465Z
+ * Date: 2017-11-01T02:49:14.556Z
  */
 
 import $ from 'jquery';

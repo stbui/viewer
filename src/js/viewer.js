@@ -157,7 +157,7 @@ class Viewer {
     $toolbar.find('li[class*=reset]').toggle(options.rotatable_reset);
     $toolbar.find('li[class*=rotate-left]').toggle(options.rotatable_left);
 
-    if (this.original) {
+    if (this.$images.length <= 1) {
       this.$arrows.toggleClass(CLASS_HIDE, true);
     }
     if (!options.scalable) {
