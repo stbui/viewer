@@ -372,10 +372,6 @@
   }
 }
 
-.viewer-arrow {
-  display: block;
-}
-
 .viewer-arrow-left {
   background: url("../images/arrow-left.png") no-repeat center;
   background-size: cover;
