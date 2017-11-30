@@ -16,7 +16,6 @@ export default (
         '<li role="button" class="viewer-flip-horizontal" data-action="flip-horizontal"></li>' +
         '<li role="button" class="viewer-flip-vertical" data-action="flip-vertical"></li>' +
         '<li role="button" class="viewer-download" data-action="download"></li>' +
-        '<li role="button" class="viewer-close" data-action="mix"></li>' +
       '</ul>' +
       '<div class="viewer-navbar">' +
         '<ul class="viewer-list"></ul>' +

@@ -42,11 +42,11 @@ export default {
         break;
 
       case 'zoom-in':
-        this.zoom(0.1, true);
+        this.zoom(0.2, true);
         break;
 
       case 'zoom-out':
-        this.zoom(-0.1, true);
+        this.zoom(-0.2, true);
         break;
 
       case 'one-to-one':
