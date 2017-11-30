@@ -64,6 +64,9 @@ export default {
 
     this.$canvas.off(EVENT_POINTER_DOWN, this.pointerdown);
 
+    this.$arrowLeft.off(EVENT_CLICK);
+    this.$arrowRight.off(EVENT_CLICK);
+
     $(document)
       .off(EVENT_POINTER_MOVE, this.onPointerMove)
       .off(EVENT_POINTER_UP, this.onPointerUp)

@@ -5,7 +5,7 @@
  * Copyright (c) 2017-2017 stbui
  * Released under the MIT license
  *
- * Date: 2017-11-03T09:31:48.894Z
+ * Date: 2017-11-30T09:02:06.523Z
  */
 
 'use strict';
@@ -614,6 +614,9 @@ var events = {
     this.$viewer.off(EVENT_CLICK, this.click).off(EVENT_WHEEL, this.wheel).off(EVENT_DRAG_START, this.dragstart);
 
     this.$canvas.off(EVENT_POINTER_DOWN, this.pointerdown);
+
+    this.$arrowLeft.off(EVENT_CLICK);
+    this.$arrowRight.off(EVENT_CLICK);
 
     $(document).off(EVENT_POINTER_MOVE, this.onPointerMove).off(EVENT_POINTER_UP, this.onPointerUp).off(EVENT_KEY_DOWN, this.onKeyDown);
 
